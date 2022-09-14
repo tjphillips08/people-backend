@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     }
 })
 //show route
-router.get('/:id', (req,res) =>{
+router.get('/:id', async (req,res) =>{
     try{
     res.status(200).json(await Recipes.findById(req.params.id))
     }
@@ -33,18 +33,18 @@ router.get('/:id', (req,res) =>{
     }
 })
 //Update
-router.put("/:id", (req,res) =>{
+router.put("/:id", async(req,res) =>{
     try{
-    res.status(200).json(await Recipes.findById(req.params.id))
+    res.status(200).json(await Recipes.findByIdAndUpdate(req.params.id, req.body,{new:true}))
     }
     catch(err){
         console.log(err)
     }
 })
 //Delete
-router.delete('/:id', (req,res) =>{
+router.delete('/:id', async (req,res) =>{
     try{
-    res.status(200).json(await Recipes.findById(req.params.id))
+    res.status(200).json(await Recipes.findByIdAndRemove(req.params.id))
     }
     catch(err){
         console.log(err)
