@@ -16,7 +16,7 @@ const app = express();
 const mongoose = require('mongoose');
 
 // My controllers 
-const peopleController = require('./controllers/people-controller')
+const recipesController = require('./controllers/recipes-controller')
 
 // Cors and morgan
 const cors = require("cors");
@@ -25,7 +25,7 @@ const morgan = require("morgan");
 ///////////////////////////////
 // DATABASE CONNECTION
 ////////////////////////////////
-
+mongoose.connect(MONGODB_URI);
 // Connection Events
 mongoose.connection
   .on("open", () => console.log("This is my awesome amazing connection man"))
@@ -40,7 +40,7 @@ app.use(express.json()); //parse json
 app.use(cors()); //We now pray to whatever higher power or God we have that this works
 app.use(morgan("dev"));
 
-app.use('/people', peopleController);
+app.use('/recipes', recipesController);
 
 ///////////////////////////////
 // ROUTES
@@ -59,3 +59,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
     console.log(`I'm totally listening to you on port ${PORT}`)
 })
+
+module.exports = app
