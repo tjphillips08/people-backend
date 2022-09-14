@@ -32,13 +32,24 @@ router.get('/:id', (req,res) =>{
         console.log(err)
     }
 })
-
-router.delete('/:id', (req,res) =>{
-    res.status(200).json({message:"Delete this recipe" + req.params.id})
-})
-
+//Update
 router.put("/:id", (req,res) =>{
-    res.status(200).json({message:"recipe update route" + req.params.id})
+    try{
+    res.status(200).json(await Recipes.findById(req.params.id))
+    }
+    catch(err){
+        console.log(err)
+    }
 })
+//Delete
+router.delete('/:id', (req,res) =>{
+    try{
+    res.status(200).json(await Recipes.findById(req.params.id))
+    }
+    catch(err){
+        console.log(err)
+    }
+})
+
 
 module.exports = router;
